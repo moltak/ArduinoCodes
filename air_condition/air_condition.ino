@@ -15,9 +15,14 @@ void setup() {
   connectWifi();
 
   // Use WiFiClient class to create TCP connections
-  const char* host2 = "openapi.seoul.go.kr//json/RealtimeCityAir/1/5/동부권/성북구";
-  
+  // openapi.seoul.go.kr/42477670436d6f6c37366b704c536f/json/RealtimeCityAir/1/5/동북권/성북구
+  const char* host2 = "openapi.seoul.go.kr/42477670436d6f6c37366b704c536f/json/RealtimeCityAir/1/5/동북권/성북구";
+
   WiFiClient client;
+  IPAddress remote_addr;
+  Serial.println(String(" HostByName: ") + String(WiFi.hostByName(host2, remote_addr, 5000)));
+  int result = client.connect(host2, 8088);
+  Serial.println(String("Resulut: ") + String(result));
   if (!client.connect(host2, 8088)) {
     Serial.println("connection failed");
     delay(5000);

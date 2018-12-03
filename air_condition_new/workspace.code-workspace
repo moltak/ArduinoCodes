@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"terminal.integrated.env.linux": {
+			"PATH": "/home/engeng/.platformio/penv/bin:/home/engeng/.platformio/penv:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/linuxbrew/.linuxbrew/opt/fzf/bin:/home/engeng/Android/Sdk//tools:/home/engeng/Android/Sdk//platforms:/home/engeng/Android/Sdk//platform-tools",
+			"PLATFORMIO_CALLER": "vscode"
+		}
+	}
+}
