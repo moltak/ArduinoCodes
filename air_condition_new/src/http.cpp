@@ -2,45 +2,54 @@
 #include "SECRET.h"
 #include "wifi.h"
 
-const String BASE_URL = "http://openAPI.seoul.go.kr/";
+const String BASE_URL = "openAPI.seoul.go.kr";
 const String SUFFIX_URL = "/json/RealtimeCityAir/1/5/";
 const int PORT = 8088;
 
-String httpRequestUrl(String area, String town) {
-  return BASE_URL + String(API_KEY) + SUFFIX_URL + area + "/" + town;
+String httpRequestUrl()
+{
+  return BASE_URL;
 }
 
-FineParticle requestAirCondition(String area, String town) {
+String getRequest(String area, String town)
+{
+  String url = "/" + String(API_KEY) + SUFFIX_URL + area + "/" + town;
+
+  return String("GET ") + url + " HTTP/1.1\r\n" +
+         "Host: " + BASE_URL + "\r\n" +
+         "User-Agent: ESP8266\r\n" +
+         "Connection: close\r\n\r\n";
+}
+
+FineParticle requestAirCondition(String area, String town)
+{
   struct FineParticle fp;
 
   WiFiClient client;
 
-  if (!client.connect(httpRequestUrl(area, town), PORT)) {
+  if (!client.connect(httpRequestUrl(), PORT))
+  {
     fp.error = "Error while connecting AirCondition server";
     return fp;
   }
 
-  // wait for data to be available
-  unsigned long timeout = millis();
-  while (client.available() == 0) {
-    if (millis() - timeout > 5000) {
-      fp.error = "Client Timeout";
-      client.stop();
-      return fp;
+  client.print(getRequest(area, town));
+
+  while (client.connected())
+  {
+    String line = client.readStringUntil('\n');
+    if (line == "\r")
+    {
+      Serial.println("headers received");
+      break;
     }
   }
-
-  String raw = "";
-
-  while (client.available()) {
-    char ch = static_cast<char>(client.read());
-    raw += ch;
-  }
-
-  client.stop();
+  String raw = client.readString();
 
   StaticJsonBuffer<200> jsonBuffer;
-  JsonObject& root = jsonBuffer.parseObject(raw);
+  JsonObject &root = jsonBuffer.parseObject(raw);
+
+  Serial.println(raw);
 
   fp.pm25 = root["RealtimeCityAir"]["row"][0]["PM25"];
   fp.pm10 = root["RealtimeCityAir"]["row"][0]["PM10"];

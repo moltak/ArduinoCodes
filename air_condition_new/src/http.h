@@ -9,7 +9,9 @@ struct FineParticle {
   String error;
 };
 
-String httpRequestUrl(String area, String town);
+String httpRequestUrl();
+
+String getRequest(String area, String town);
 
 FineParticle requestAirCondition(String area, String town);
 
