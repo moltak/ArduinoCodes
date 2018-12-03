@@ -32,8 +32,8 @@ void loop()
     printToLcd(0, 0, "PM 2.5: " + String(fp.pm25));
     printToLcd(1, 0, "PM 10: " + String(fp.pm10));
 
-    Serial.println("PM 2.5: " + fp.pm25);
-    Serial.println("PM 10: " + fp.pm10);
+    Serial.println("PM 2.5: " + String(fp.pm25));
+    Serial.println("PM 10: " + String(fp.pm10));
   }
 
   delay(MIN_10);

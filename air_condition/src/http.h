@@ -4,8 +4,8 @@
 #include "ArduinoJson.h"
 
 struct FineParticle {
-  float pm25;
-  float pm10;
+  double pm25;
+  double pm10;
   String error;
 };
 

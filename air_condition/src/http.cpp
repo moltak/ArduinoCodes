@@ -47,12 +47,15 @@ FineParticle requestAirCondition(String area, String town)
   String raw = client.readString();
 
   StaticJsonBuffer<200> jsonBuffer;
-  JsonObject &root = jsonBuffer.parseObject(raw);
+  String extracted = raw.substring(raw.indexOf("[") + 1, raw.indexOf("]"));
+  JsonObject &root = jsonBuffer.parseObject(extracted);
 
   Serial.println(raw);
+  Serial.println(extracted);
+  Serial.println(String("Parsing Success: ") + root.success());
 
-  fp.pm25 = root["RealtimeCityAir"]["row"][0]["PM25"];
-  fp.pm10 = root["RealtimeCityAir"]["row"][0]["PM10"];
+  fp.pm25 = root["PM25"];
+  fp.pm10 = root["PM10"];
 
   return fp;
 }
