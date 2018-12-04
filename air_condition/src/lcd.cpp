@@ -33,8 +33,15 @@ int lcdKeyToKeypad(int lcdKey) {
 }
 
 void printToLcd(int row, int column, String str) {
+  clearLine(row);
+
   lcd.setCursor(column, row);
   lcd.print(str);
+}
+
+void clearLine(int row) {
+  lcd.setCursor(0, row);
+  lcd.print("                ");
 }
 
 void printSelectedKeypad(int lcdKey) {

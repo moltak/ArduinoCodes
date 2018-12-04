@@ -17,6 +17,8 @@ void lcdSetup();
 
 void printToLcd(int row, int column, String str);
 
+void clearLine(int row);
+
 void printSelectedKeypad(int lcdKey);
 
 #endif

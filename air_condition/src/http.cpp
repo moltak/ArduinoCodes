@@ -44,9 +44,10 @@ FineParticle requestAirCondition(String area, String town)
       break;
     }
   }
+
   String raw = client.readString();
 
-  StaticJsonBuffer<200> jsonBuffer;
+  StaticJsonBuffer<400> jsonBuffer;
   String extracted = raw.substring(raw.indexOf("[") + 1, raw.indexOf("]"));
   JsonObject &root = jsonBuffer.parseObject(extracted);
 
@@ -54,8 +55,8 @@ FineParticle requestAirCondition(String area, String town)
   Serial.println(extracted);
   Serial.println(String("Parsing Success: ") + root.success());
 
-  fp.pm25 = root["PM25"];
-  fp.pm10 = root["PM10"];
+  fp.pm25 = (int)root["PM25"];
+  fp.pm10 = (int)root["PM10"];
 
   return fp;
 }
