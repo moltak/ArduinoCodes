@@ -6,9 +6,6 @@
 
 const int MIN_10 = 10 * 60 * 1000;
 
-const char *host = "djxmmx.net";
-const uint16_t port = 17;
-
 void setup()
 {
   Serial.begin(9600);
