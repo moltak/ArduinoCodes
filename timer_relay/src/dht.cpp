@@ -1,13 +1,26 @@
 #include "dht.h"
 
-float humidity(DHT_Unified &dht) {
+DhtClass::DhtClass() {
+    DHT_Unified dht(DHTPIN, DHTTYPE);
+    this->dhtModule = &dht;
+}
+
+void DhtClass::begin() {
+    this->dhtModule->begin();
+}
+
+float DhtClass::humidity() {
     sensors_event_t event;
-    dht.humidity().getEvent(&event);
+    (this->dhtModule)->humidity().getEvent(&event);
     return event.temperature;
 }
 
-float temperature(DHT_Unified &dht) {
+float DhtClass::temperature() {
     sensors_event_t event;
-    dht.temperature().getEvent(&event);
+    (this->dhtModule)->temperature().getEvent(&event);
     return event.relative_humidity;
+}
+
+DHT_Unified* DhtClass::dht() {
+    return (this->dhtModule);
 }

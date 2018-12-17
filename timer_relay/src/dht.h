@@ -6,11 +6,20 @@
 #include <DHT_U.h>
 #include "wemos_d1.h"
 
-#define DHTPIN  D12
+#define DHTPIN D12
 #define DHTTYPE DHT11
 
-float humidity(DHT_Unified &dht);
+class DhtClass
+{
+  public:
+    DhtClass();
+    void begin();
+    float humidity();
+    float temperature();
+    DHT_Unified* dht();
 
-float temperature(DHT_Unified &dht);
+  private:
+    DHT_Unified *dhtModule;//(DHTPIN, DHTTYPE);
+};
 
 #endif

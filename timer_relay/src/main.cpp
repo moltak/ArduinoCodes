@@ -8,7 +8,7 @@ const int dhtPin = D12;
 
 const int HOUR = 6000;
 
-DHT_Unified dht(DHTPIN, DHTTYPE);
+DhtClass *dhtClass = new DhtClass();
 
 void setup()
 {
@@ -17,18 +17,21 @@ void setup()
      
     Serial.begin(9600);
 
-    dht.begin();
+    dhtClass->begin();
 }
 
 void loop()
 {
+    float temperature = dhtClass->temperature();
+    float humidity = dhtClass->humidity();
+
     Serial.print("temperature:");
-    Serial.print(temperature(dht));
+    Serial.print(temperature);
     Serial.print(" humidity:");
-    Serial.print(humidity(dht));
+    Serial.print(humidity);
     Serial.println();
 
-    if (humidity(dht) < 40) {
+    if (humidity < 40) {
         digitalWrite(relayPin, HIGH);
         digitalWrite(ledPin, HIGH);
     } else {
