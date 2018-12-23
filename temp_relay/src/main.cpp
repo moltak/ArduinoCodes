@@ -6,9 +6,9 @@ const int relayPin = D3;
 const int ledPin = LED_BUILTIN;
 const int dhtPin = D12;
 
-const int HOUR = 6000;
+const int HALF_HOUR = 30 * 60 * 1000;
 
-DhtClass *dhtClass = new DhtClass();
+DhtClass *dhtClass = new DhtClass(dhtPin);
 
 void setup()
 {
@@ -39,5 +39,5 @@ void loop()
         digitalWrite(ledPin, LOW);
     }
 
-    delay(HOUR);
+    delay(HALF_HOUR);
 }

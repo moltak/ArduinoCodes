@@ -1,7 +1,7 @@
 #include "dht.h"
 
-DhtClass::DhtClass() {
-    DHT_Unified dht(DHTPIN, DHTTYPE);
+DhtClass::DhtClass(int pin) {
+    DHT_Unified dht(pin, DHTTYPE);
     this->dhtModule = &dht;
 }
 
