@@ -63,3 +63,11 @@ void printSelectedKeypad(int lcdKey) {
       break;
   }
 }
+
+void lcdOn() {
+  lcd.display();
+}
+
+void lcdOff() {
+  lcd.noDisplay();
+}

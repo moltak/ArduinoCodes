@@ -21,4 +21,8 @@ void clearLine(int row);
 
 void printSelectedKeypad(int lcdKey);
 
+void lcdOn();
+
+void lcdOff();
+
 #endif
