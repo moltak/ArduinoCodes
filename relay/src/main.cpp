@@ -1,28 +1,37 @@
 #include <Arduino.h>
 #include "wemos_d1.h"
 
-const int relayPin = D3;
-const int ledPin = LED_BUILTIN;
-
+const int RELAY = D3;
 const int DELAY_DURATION = 1000;
+
+void turnOff();
+void turnOn();
 
 void setup()
 {
-    pinMode(relayPin, OUTPUT);
-    pinMode(ledPin, OUTPUT);
-
     Serial.begin(9600);
+
+    pinMode(RELAY, OUTPUT);
+    pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop()
 {
-    digitalWrite(relayPin, HIGH);
-    digitalWrite(ledPin, HIGH);
-
-    delay(10000);
-
-    digitalWrite(relayPin, LOW);
-    digitalWrite(ledPin, LOW);
-
+    turnOn();
     delay(DELAY_DURATION);
+
+    turnOff();
+    delay(DELAY_DURATION);
+}
+
+void turnOff()
+{
+    digitalWrite(RELAY, LOW);
+    digitalWrite(LED_BUILTIN, LOW);
+}
+
+void turnOn()
+{
+    digitalWrite(RELAY, HIGH);
+    digitalWrite(LED_BUILTIN, HIGH);
 }
